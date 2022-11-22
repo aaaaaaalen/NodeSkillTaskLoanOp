@@ -19,9 +19,10 @@ const entriesList = async (category, limit) => {
             if (response.data) {
                 const resultList = response.data.entries;
                 const matchList = [];
+
                 for(const i in resultList){
                     if(resultList[i].Category === category){
-                        if(matchList.length <= limit){
+                        if(matchList.length < limit){
                             matchList.push(resultList[i]);
                         }else{
                             break;
@@ -31,6 +32,7 @@ const entriesList = async (category, limit) => {
                 if(matchList.length === 0){
                     console.log('No results');  
                 }else{
+                    matchList.sort((a, b) => a.API.localeCompare(b.API)).reverse();     
                     console.log(matchList);  
                 }
                       
